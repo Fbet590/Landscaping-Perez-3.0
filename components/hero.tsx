@@ -112,11 +112,11 @@ export function Hero() {
 
       <div className="relative mx-auto flex max-w-7xl flex-col items-start gap-8 px-6 py-10 md:flex-row md:items-center md:justify-between md:py-14">
         <div className="max-w-xl">
-          <h1 className="text-balance font-serif font-extrabold leading-tight text-background" style={{ fontSize: "40px" }}>
+          <h1 className="text-balance font-serif font-extrabold leading-tight text-background text-[50px] md:text-[40px]">
             Unlock Stunning Outdoor Design & Installation
           </h1>
           <div className="my-4 h-1 w-24 rounded-full" style={{ backgroundColor: "#85BF23" }} />
-          <h2 className="text-balance font-serif text-xl font-bold text-background md:text-2xl">
+          <h2 className="text-balance font-serif text-[30px] font-bold text-background md:text-2xl">
             Upgrade with One of Our Packages
           </h2>
           <div className="mt-6 flex flex-col gap-3">
@@ -124,19 +124,19 @@ export function Hero() {
               <span className="flex size-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: "#85BF23" }}>
                 <Check className="size-3 text-white" strokeWidth={3} />
               </span>
-              <span className="text-sm font-medium text-background">Premium Turf on all Packages - 104oz</span>
+              <span className="text-[21px] md:text-sm font-medium text-background">Premium Turf on all Packages - 104oz</span>
             </div>
             <div className="flex items-center gap-2.5">
               <span className="flex size-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: "#85BF23" }}>
                 <Check className="size-3 text-white" strokeWidth={3} />
               </span>
-              <span className="text-sm font-medium text-background">Top Tier Phoenix Pavers</span>
+              <span className="text-[21px] md:text-sm font-medium text-background">Top Tier Phoenix Pavers</span>
             </div>
             <div className="flex items-center gap-2.5">
               <span className="flex size-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: "#85BF23" }}>
                 <Check className="size-3 text-white" strokeWidth={3} />
               </span>
-              <span className="text-sm font-medium text-background">Decorative Rock & Other Features!</span>
+              <span className="text-[21px] md:text-sm font-medium text-background">Decorative Rock & Other Features!</span>
             </div>
           </div>
           <a
