@@ -10,6 +10,11 @@ const galleryImages = [
   { src: "/images/gallery-3.jpg", alt: "Front yard hardscape with decorative pavers" },
   { src: "/images/gallery-4.jpg", alt: "Pool area with stone paver deck" },
   { src: "/images/gallery-5.jpg", alt: "Zen garden with decorative pathway" },
+  { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fredibetancourth_artificial_turf_around_a_cantilever_style_perg_42faee7d-d0b9-4055-8a12-a80fd7768222-ZiOVW07YdX1Qp362E0K6d0xpPi9wCA.png", alt: "Modern backyard with cantilever pergola and artificial turf" },
+  { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fredibetancourth_a_remodeled_backyard_designed_for_homeowners_o_75c76465-d380-4b8d-ad49-e98aadcc01cd-Glxds6CYGpgDapB4SXSGEcjZQgsajD.png", alt: "Aerial view of backyard with artificial turf and paver patio" },
+  { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fredibetancourth_artificial_turf_in_the_backyard_of_an_arizona__90b8f576-dba5-4b29-95ac-387ae4a23567-yewkjTnLmpVY2q6YJbBYyYs6YbqKKG.png", alt: "Arizona backyard with artificial turf and tree-lined border" },
+  { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fredibetancourth_artificial_turf_in_the_backyard_of_an_arizona__3e00d00b-4696-4738-bfbb-de4687202681-2DUoxhzHv1bXNnq0t5ggkV8vdEtgCj.png", alt: "Lush green artificial turf lawn with desert trees" },
+  { src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fredibetancourth_a_remodeled_backyard_designed_for_homeowners_o_34f021dd-c498-4bf3-879d-42396079b8dd-2V6D57w3va8bCDb4zsHqOGOz3exoSI.png", alt: "Backyard with artificial turf and covered outdoor kitchen" },
 ]
 
 export function Portfolio() {

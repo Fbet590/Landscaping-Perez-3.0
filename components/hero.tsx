@@ -2,55 +2,30 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { Checkbox } from "@/components/ui/checkbox"
 import { ChevronLeft, ChevronRight, Send, Check, CalendarCheck, Clock, MapPin } from "lucide-react"
 import { trackFBEvent } from "./facebook-pixel"
 
-const projectOptions = [
-  { id: "turf", label: "Turf Installation", icon: "T" },
-  { id: "pavers", label: "Pavers (patio, walkway, or driveway)", icon: "P" },
-  { id: "concrete", label: "Concrete/Patio Extension/Driveway", icon: "C" },
-  { id: "remodel", label: "Full Backyard Remodel", icon: "R" },
-]
+const totalSteps = 4
 
-const budgetOptions = [
-  "$10,000 - $15,000",
-  "$15,000 - $25,000",
-  "$25,000 - $40,000",
-  "$40,000 +",
+const packageOptions = [
+  "$7,000 Package",
+  "$12,500 Package",
+  "$18,000 Package",
 ]
-
-const flexibilityOptions = [
-  "Yes, I prefer premium quality even if the cost increases slightly",
-  "Maybe, depends on the options presented",
-  "No, I have a fixed budget",
-]
-
-const totalSteps = 6
 
 export function Hero() {
   const [step, setStep] = useState(0)
-  const [selectedProjects, setSelectedProjects] = useState<string[]>([])
-  const [selectedBudget, setSelectedBudget] = useState("")
-  const [selectedFlexibility, setSelectedFlexibility] = useState("")
+  const [selectedPackage, setSelectedPackage] = useState("")
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
 
-  function toggleProject(id: string) {
-    setSelectedProjects((prev) =>
-      prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
-    )
-  }
-
   function canAdvance() {
     switch (step) {
-      case 0: return selectedProjects.length > 0
-      case 1: return selectedBudget !== ""
-      case 2: return selectedFlexibility !== ""
-      case 3: return name.trim() !== ""
-      case 4: return email.trim() !== ""
-      case 5: return phone.trim() !== ""
+      case 0: return selectedPackage !== ""
+      case 1: return name.trim() !== ""
+      case 2: return email.trim() !== ""
+      case 3: return phone.trim() !== ""
       default: return false
     }
   }
@@ -64,9 +39,7 @@ export function Hero() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          projects: selectedProjects,
-          budget: selectedBudget,
-          flexibility: selectedFlexibility,
+          package: selectedPackage,
           name,
           email,
           phone,
@@ -77,15 +50,11 @@ export function Hero() {
         try {
           trackFBEvent("Lead", {
             content_name: "Quote Request",
-            content_category: selectedProjects.join(", "),
-            value: selectedBudget,
           })
         } catch {}
         alert("Thank you! We'll be in touch soon.")
         setStep(0)
-        setSelectedProjects([])
-        setSelectedBudget("")
-        setSelectedFlexibility("")
+        setSelectedPackage("")
         setName("")
         setEmail("")
         setPhone("")
@@ -107,12 +76,10 @@ export function Hero() {
   function validateAndAdvance() {
     if (!canAdvance()) {
       const messages: Record<number, string> = {
-        0: "Please select at least one project type",
-        1: "Please select a budget range",
-        2: "Please select a flexibility option",
-        3: "Please enter your name",
-        4: "Please enter a valid email address",
-        5: "Please enter your phone number",
+        0: "Please select a package",
+        1: "Please enter your name",
+        2: "Please enter a valid email address",
+        3: "Please enter your phone number",
       }
       setErrors({ [step]: messages[step] })
       return
@@ -146,8 +113,12 @@ export function Hero() {
       <div className="relative mx-auto flex max-w-7xl flex-col items-start gap-8 px-6 py-10 md:flex-row md:items-center md:justify-between md:py-14">
         <div className="max-w-xl">
           <h1 className="text-balance font-serif font-extrabold leading-tight text-background" style={{ fontSize: "40px" }}>
-            Unlock Stunning Outdoor Spaces with Our Expert Design & Installation
+            Unlock Stunning Outdoor Design & Installation
           </h1>
+          <div className="my-4 h-1 w-24 rounded-full" style={{ backgroundColor: "#85BF23" }} />
+          <h2 className="text-balance font-serif text-xl font-bold text-background md:text-2xl">
+            Upgrade with One of Our Packages
+          </h2>
           <div className="mt-6 flex flex-col gap-3">
             <div className="flex items-center gap-2.5">
               <span className="flex size-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: "#85BF23" }}>
@@ -207,34 +178,28 @@ export function Hero() {
               </div>
             </div>
 
-            {/* Step 0: Project type */}
+            {/* Step 0: Package Selection */}
             {step === 0 && (
               <>
                 <h3 className="text-base font-bold text-foreground">
-                  What type of project are you planning?
+                  Which package are you interested in the most?
                 </h3>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Check all that apply
+                  Select the package that best fits your needs
                 </p>
                 <div className="mt-5 flex flex-col gap-2.5">
-                  {projectOptions.map((option) => (
-                    <label
-                      key={option.id}
-                      className={`flex cursor-pointer items-center gap-3 rounded-xl border-2 px-4 py-3 transition-all ${
-                        selectedProjects.includes(option.id)
-                          ? "border-primary bg-primary/5 shadow-sm"
-                          : "border-border hover:border-primary/30"
+                  {packageOptions.map((option) => (
+                    <button
+                      key={option}
+                      onClick={() => setSelectedPackage(option)}
+                      className={`rounded-xl border-2 px-4 py-3 text-left text-sm font-medium transition-all ${
+                        selectedPackage === option
+                          ? "border-primary bg-primary/5 text-foreground shadow-sm"
+                          : "border-border text-foreground hover:border-primary/30"
                       }`}
                     >
-                      <Checkbox
-                        checked={selectedProjects.includes(option.id)}
-                        onCheckedChange={() => toggleProject(option.id)}
-                        className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
-                      />
-                      <span className="text-sm font-medium text-foreground">
-                        {option.label}
-                      </span>
-                    </label>
+                      {option}
+                    </button>
                   ))}
                 </div>
                 {errors[0] && (
@@ -243,68 +208,8 @@ export function Hero() {
               </>
             )}
 
-            {/* Step 1: Budget */}
+            {/* Step 1: Name */}
             {step === 1 && (
-              <>
-                <h3 className="text-base font-bold text-foreground">
-                  {"What's your approximate budget?"}
-                </h3>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Select the range that fits your project
-                </p>
-                <div className="mt-5 flex flex-col gap-2.5">
-                  {budgetOptions.map((option) => (
-                    <button
-                      key={option}
-                      onClick={() => setSelectedBudget(option)}
-                      className={`rounded-xl border-2 px-4 py-3 text-left text-sm font-medium transition-all ${
-                        selectedBudget === option
-                          ? "border-primary bg-primary/5 text-foreground shadow-sm"
-                          : "border-border text-foreground hover:border-primary/30"
-                      }`}
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </div>
-                {errors[1] && (
-                  <p className="mt-2 text-xs font-medium text-red-500">{errors[1]}</p>
-                )}
-              </>
-            )}
-
-            {/* Step 2: Flexibility */}
-            {step === 2 && (
-              <>
-                <h3 className="text-base font-bold text-foreground">
-                  Are you flexible with your budget?
-                </h3>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  To guarantee premium-quality materials & workmanship
-                </p>
-                <div className="mt-5 flex flex-col gap-2.5">
-                  {flexibilityOptions.map((option) => (
-                    <button
-                      key={option}
-                      onClick={() => setSelectedFlexibility(option)}
-                      className={`rounded-xl border-2 px-4 py-3 text-left text-sm font-medium transition-all ${
-                        selectedFlexibility === option
-                          ? "border-primary bg-primary/5 text-foreground shadow-sm"
-                          : "border-border text-foreground hover:border-primary/30"
-                      }`}
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </div>
-                {errors[2] && (
-                  <p className="mt-2 text-xs font-medium text-red-500">{errors[2]}</p>
-                )}
-              </>
-            )}
-
-            {/* Step 3: Name */}
-            {step === 3 && (
               <>
                 <h3 className="text-base font-bold text-foreground">
                   {"What's your name?"}
@@ -319,14 +224,14 @@ export function Hero() {
                   placeholder="Your full name"
                   className="mt-5 w-full rounded-xl border-2 border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-primary focus:outline-none"
                 />
-                {errors[3] && (
-                  <p className="mt-2 text-xs font-medium text-red-500">{errors[3]}</p>
+                {errors[1] && (
+                  <p className="mt-2 text-xs font-medium text-red-500">{errors[1]}</p>
                 )}
               </>
             )}
 
-            {/* Step 4: Email */}
-            {step === 4 && (
+            {/* Step 2: Email */}
+            {step === 2 && (
               <>
                 <h3 className="text-base font-bold text-foreground">
                   {"What's your email address?"}
@@ -341,14 +246,14 @@ export function Hero() {
                   placeholder="you@example.com"
                   className="mt-5 w-full rounded-xl border-2 border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-primary focus:outline-none"
                 />
-                {errors[4] && (
-                  <p className="mt-2 text-xs font-medium text-red-500">{errors[4]}</p>
+                {errors[2] && (
+                  <p className="mt-2 text-xs font-medium text-red-500">{errors[2]}</p>
                 )}
               </>
             )}
 
-            {/* Step 5: Phone */}
-            {step === 5 && (
+            {/* Step 3: Phone */}
+            {step === 3 && (
               <>
                 <h3 className="text-base font-bold text-foreground">
                   {"Best number to reach you?"}
@@ -363,8 +268,8 @@ export function Hero() {
                   placeholder="(555) 123-4567"
                   className="mt-5 w-full rounded-xl border-2 border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-primary focus:outline-none"
                 />
-                {errors[5] && (
-                  <p className="mt-2 text-xs font-medium text-red-500">{errors[5]}</p>
+                {errors[3] && (
+                  <p className="mt-2 text-xs font-medium text-red-500">{errors[3]}</p>
                 )}
               </>
             )}
@@ -380,7 +285,7 @@ export function Hero() {
                   Back
                 </button>
               )}
-              {step < 5 ? (
+              {step < 3 ? (
                 <button
                   onClick={validateAndAdvance}
                   className="flex flex-1 items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-all hover:opacity-90"
