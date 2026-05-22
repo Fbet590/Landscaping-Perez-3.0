@@ -49,7 +49,7 @@ export function Navbar() {
           className="hidden rounded-md px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:opacity-90 md:inline-block"
           style={{ backgroundColor: "#85BF23" }}
         >
-          GET A QUOTE
+          GET MY PACKAGE
         </a>
 
         <button
@@ -82,7 +82,7 @@ export function Navbar() {
             style={{ backgroundColor: "#85BF23" }}
             onClick={() => setMobileOpen(false)}
           >
-            GET A QUOTE
+            GET MY PACKAGE
           </a>
         </div>
       )}

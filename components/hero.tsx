@@ -124,19 +124,19 @@ export function Hero() {
               <span className="flex size-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: "#85BF23" }}>
                 <Check className="size-3 text-white" strokeWidth={3} />
               </span>
-              <span className="text-sm font-medium text-background">Artificial Turf Installation</span>
+              <span className="text-sm font-medium text-background">Premium Turf on all Packages - 104oz</span>
             </div>
             <div className="flex items-center gap-2.5">
               <span className="flex size-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: "#85BF23" }}>
                 <Check className="size-3 text-white" strokeWidth={3} />
               </span>
-              <span className="text-sm font-medium text-background">Pavers</span>
+              <span className="text-sm font-medium text-background">Top Tier Phoenix Pavers</span>
             </div>
             <div className="flex items-center gap-2.5">
               <span className="flex size-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: "#85BF23" }}>
                 <Check className="size-3 text-white" strokeWidth={3} />
               </span>
-              <span className="text-sm font-medium text-background">Full Backyard Remodels</span>
+              <span className="text-sm font-medium text-background">Decorative Rock & Other Features!</span>
             </div>
           </div>
           <a
@@ -144,7 +144,7 @@ export function Hero() {
             className="mt-6 inline-block rounded-md px-6 py-3 text-sm font-semibold uppercase text-primary-foreground transition-colors hover:opacity-90"
             style={{ backgroundColor: "#85BF23" }}
           >
-            GET A QUOTE
+            GET MY PACKAGE
           </a>
         </div>
 
