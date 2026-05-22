@@ -144,7 +144,7 @@ export function Hero() {
             className="mt-6 inline-block rounded-md px-6 py-3 text-sm font-semibold uppercase text-primary-foreground transition-colors hover:opacity-90"
             style={{ backgroundColor: "#85BF23" }}
           >
-            GET A QUOTE
+            GET MY PACKAGE
           </a>
         </div>
 
