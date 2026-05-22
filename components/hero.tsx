@@ -146,7 +146,7 @@ export function Hero() {
       <div className="relative mx-auto flex max-w-7xl flex-col items-start gap-8 px-6 py-10 md:flex-row md:items-center md:justify-between md:py-14">
         <div className="max-w-xl">
           <h1 className="text-balance font-serif font-extrabold leading-tight text-background" style={{ fontSize: "40px" }}>
-            Unlock Stunning Outdoor Spaces with Our Expert Design & Installation
+            Unlock Stunning Outdoor Design & Installation
           </h1>
           <div className="mt-6 flex flex-col gap-3">
             <div className="flex items-center gap-2.5">
