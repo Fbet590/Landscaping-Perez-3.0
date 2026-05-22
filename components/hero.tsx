@@ -5,19 +5,27 @@ import Image from "next/image"
 import { ChevronLeft, ChevronRight, Send, Check, CalendarCheck, Clock, MapPin } from "lucide-react"
 import { trackFBEvent } from "./facebook-pixel"
 
-const totalSteps = 3
+const totalSteps = 4
+
+const packageOptions = [
+  "$7,000 Package",
+  "$12,500 Package",
+  "$18,000 Package",
+]
 
 export function Hero() {
   const [step, setStep] = useState(0)
+  const [selectedPackage, setSelectedPackage] = useState("")
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
 
   function canAdvance() {
     switch (step) {
-      case 0: return name.trim() !== ""
-      case 1: return email.trim() !== ""
-      case 2: return phone.trim() !== ""
+      case 0: return selectedPackage !== ""
+      case 1: return name.trim() !== ""
+      case 2: return email.trim() !== ""
+      case 3: return phone.trim() !== ""
       default: return false
     }
   }
@@ -31,6 +39,7 @@ export function Hero() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          package: selectedPackage,
           name,
           email,
           phone,
@@ -45,6 +54,7 @@ export function Hero() {
         } catch {}
         alert("Thank you! We'll be in touch soon.")
         setStep(0)
+        setSelectedPackage("")
         setName("")
         setEmail("")
         setPhone("")
@@ -66,9 +76,10 @@ export function Hero() {
   function validateAndAdvance() {
     if (!canAdvance()) {
       const messages: Record<number, string> = {
-        0: "Please enter your name",
-        1: "Please enter a valid email address",
-        2: "Please enter your phone number",
+        0: "Please select a package",
+        1: "Please enter your name",
+        2: "Please enter a valid email address",
+        3: "Please enter your phone number",
       }
       setErrors({ [step]: messages[step] })
       return
@@ -167,8 +178,38 @@ export function Hero() {
               </div>
             </div>
 
-            {/* Step 0: Name */}
+            {/* Step 0: Package Selection */}
             {step === 0 && (
+              <>
+                <h3 className="text-base font-bold text-foreground">
+                  Which package are you interested in the most?
+                </h3>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Select the package that best fits your needs
+                </p>
+                <div className="mt-5 flex flex-col gap-2.5">
+                  {packageOptions.map((option) => (
+                    <button
+                      key={option}
+                      onClick={() => setSelectedPackage(option)}
+                      className={`rounded-xl border-2 px-4 py-3 text-left text-sm font-medium transition-all ${
+                        selectedPackage === option
+                          ? "border-primary bg-primary/5 text-foreground shadow-sm"
+                          : "border-border text-foreground hover:border-primary/30"
+                      }`}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+                {errors[0] && (
+                  <p className="mt-2 text-xs font-medium text-red-500">{errors[0]}</p>
+                )}
+              </>
+            )}
+
+            {/* Step 1: Name */}
+            {step === 1 && (
               <>
                 <h3 className="text-base font-bold text-foreground">
                   {"What's your name?"}
@@ -183,14 +224,14 @@ export function Hero() {
                   placeholder="Your full name"
                   className="mt-5 w-full rounded-xl border-2 border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-primary focus:outline-none"
                 />
-                {errors[0] && (
-                  <p className="mt-2 text-xs font-medium text-red-500">{errors[0]}</p>
+                {errors[1] && (
+                  <p className="mt-2 text-xs font-medium text-red-500">{errors[1]}</p>
                 )}
               </>
             )}
 
-            {/* Step 1: Email */}
-            {step === 1 && (
+            {/* Step 2: Email */}
+            {step === 2 && (
               <>
                 <h3 className="text-base font-bold text-foreground">
                   {"What's your email address?"}
@@ -205,14 +246,14 @@ export function Hero() {
                   placeholder="you@example.com"
                   className="mt-5 w-full rounded-xl border-2 border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-primary focus:outline-none"
                 />
-                {errors[1] && (
-                  <p className="mt-2 text-xs font-medium text-red-500">{errors[1]}</p>
+                {errors[2] && (
+                  <p className="mt-2 text-xs font-medium text-red-500">{errors[2]}</p>
                 )}
               </>
             )}
 
-            {/* Step 2: Phone */}
-            {step === 2 && (
+            {/* Step 3: Phone */}
+            {step === 3 && (
               <>
                 <h3 className="text-base font-bold text-foreground">
                   {"Best number to reach you?"}
@@ -227,8 +268,8 @@ export function Hero() {
                   placeholder="(555) 123-4567"
                   className="mt-5 w-full rounded-xl border-2 border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-primary focus:outline-none"
                 />
-                {errors[2] && (
-                  <p className="mt-2 text-xs font-medium text-red-500">{errors[2]}</p>
+                {errors[3] && (
+                  <p className="mt-2 text-xs font-medium text-red-500">{errors[3]}</p>
                 )}
               </>
             )}
@@ -244,7 +285,7 @@ export function Hero() {
                   Back
                 </button>
               )}
-              {step < 2 ? (
+              {step < 3 ? (
                 <button
                   onClick={validateAndAdvance}
                   className="flex flex-1 items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-all hover:opacity-90"
