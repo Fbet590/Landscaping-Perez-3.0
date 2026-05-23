@@ -5,9 +5,7 @@ export async function POST(request: Request) {
     const body = await request.json()
 
     const payload = {
-      projects: body.projects,
-      budget: body.budget,
-      flexibility: body.flexibility,
+      package: body.package,
       name: body.name,
       email: body.email,
       phone: body.phone,
@@ -15,12 +13,7 @@ export async function POST(request: Request) {
       source: "Landscaping Perez Landing Page",
     }
 
-    const webhookUrl = process.env.WEBHOOK_URL
-
-    if (!webhookUrl) {
-      console.warn("WEBHOOK_URL not set - lead data received but not forwarded:", payload)
-      return NextResponse.json({ success: true, warning: "Webhook not configured" })
-    }
+    const webhookUrl = "https://services.leadconnectorhq.com/hooks/5xmJQ9GnZ2epwQjXcomF/webhook-trigger/Yj8DbktvyCWEVeWzMAaP"
 
     const response = await fetch(webhookUrl, {
       method: "POST",
