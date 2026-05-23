@@ -112,11 +112,11 @@ export function Hero() {
 
       <div className="relative mx-auto flex max-w-7xl flex-col items-start gap-8 px-6 py-10 md:flex-row md:items-center md:justify-between md:py-14">
         <div className="max-w-xl">
-          <h1 className="text-balance font-serif font-extrabold leading-tight text-background text-[50px] md:text-[40px]">
+          <h1 className="text-balance font-serif font-extrabold leading-tight text-background text-[60px] md:text-[40px]">
             Unlock Stunning Outdoor Design & Installation
           </h1>
           <div className="my-4 h-1 w-24 rounded-full" style={{ backgroundColor: "#85BF23" }} />
-          <h2 className="text-balance font-serif text-[30px] font-bold text-background md:text-2xl">
+          <h2 className="text-balance font-serif text-[40px] font-bold text-background md:text-2xl">
             Upgrade with One of Our Packages
           </h2>
           <div className="mt-6 flex flex-col gap-3">
@@ -124,19 +124,19 @@ export function Hero() {
               <span className="flex size-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: "#85BF23" }}>
                 <Check className="size-3 text-white" strokeWidth={3} />
               </span>
-              <span className="text-[21px] md:text-sm font-medium text-background">Premium Turf on all Packages - 104oz</span>
+              <span className="text-[18px] md:text-sm font-medium text-background">Premium Turf on all Packages - 104oz</span>
             </div>
             <div className="flex items-center gap-2.5">
               <span className="flex size-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: "#85BF23" }}>
                 <Check className="size-3 text-white" strokeWidth={3} />
               </span>
-              <span className="text-[21px] md:text-sm font-medium text-background">Top Tier Phoenix Pavers</span>
+              <span className="text-[18px] md:text-sm font-medium text-background">Top Tier Phoenix Pavers</span>
             </div>
             <div className="flex items-center gap-2.5">
               <span className="flex size-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: "#85BF23" }}>
                 <Check className="size-3 text-white" strokeWidth={3} />
               </span>
-              <span className="text-[21px] md:text-sm font-medium text-background">Decorative Rock & Other Features!</span>
+              <span className="text-[18px] md:text-sm font-medium text-background">Decorative Rock & Other Features!</span>
             </div>
           </div>
           <a
@@ -181,10 +181,10 @@ export function Hero() {
             {/* Step 0: Package Selection */}
             {step === 0 && (
               <>
-                <h3 className="text-base font-bold text-foreground">
+                <h3 className="text-[24px] font-bold text-foreground">
                   Which package are you interested in the most?
                 </h3>
-                <p className="mt-1 text-xs text-muted-foreground">
+                <p className="mt-1 text-[13px] text-muted-foreground">
                   Select the package that best fits your needs
                 </p>
                 <div className="mt-5 flex flex-col gap-2.5">
@@ -192,7 +192,7 @@ export function Hero() {
                     <button
                       key={option}
                       onClick={() => setSelectedPackage(option)}
-                      className={`rounded-xl border-2 px-4 py-3 text-left text-sm font-medium transition-all ${
+                      className={`rounded-xl border-2 px-4 py-3 text-left text-[16px] font-medium transition-all ${
                         selectedPackage === option
                           ? "border-primary bg-primary/5 text-foreground shadow-sm"
                           : "border-border text-foreground hover:border-primary/30"
